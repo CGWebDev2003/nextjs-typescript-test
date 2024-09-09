@@ -2,6 +2,7 @@ import { getAllTasks } from './api/getAllTasks';
 import TaskForm from './components/TaskForm';
 import { Task } from '@prisma/client';
 import ToggleTask from './components/ToggleTask';
+import DeleteButton from './components/DeleteButton';
 
 export default async function Home() {
   const tasks:Task[] = await getAllTasks();
@@ -17,6 +18,7 @@ export default async function Home() {
             <label>
               {task.title}
             </label>
+            <DeleteButton task={task}/>
           </li>
         ))}
       </ul>

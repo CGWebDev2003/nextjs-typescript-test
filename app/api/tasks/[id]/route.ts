@@ -30,3 +30,23 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     return NextResponse.json({ error: 'Task not found or update failed' }, { status: 500 });
   }
 }
+
+
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const { id } = params;
+    if (!id) {
+      console.error('Missing ID in the request');
+      return NextResponse.json({ error: 'Missing ID' }, { status: 400 });
+    }
+
+    const deletedTask = await prisma.task.delete({
+      where: { id: Number(id) },
+    });
+
+    return NextResponse.json(deletedTask, { status: 200 });
+  } catch (error) {
+    console.error('Error deleting task:', error);
+    return NextResponse.json({ error: 'Task not found or deletion failed' }, { status: 500 });
+  }
+}
