@@ -3,7 +3,7 @@
 import { Task } from "@prisma/client";
 import { useRouter } from 'next/navigation';
 
-export default function DeleteTask({ task }:{task:Task}) {
+export default function DeleteButton({ task }:{task:Task}) {
     const router = useRouter();
 
     const deleteTask = async () => {
